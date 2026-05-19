@@ -249,3 +249,4 @@ Possible improvements for the final version:
 ## Author
 
 **Yerkassyn Zaiymov**
+**Adilet Kairzhanov**
