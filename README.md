@@ -246,7 +246,7 @@ Possible improvements for the final version:
 - Export detection reports as PDF
 - Deploy the dashboard online
 
-## Author
+## Authors
 
-**Yerkassyn Zaiymov**
-**Adilet Kairzhanov**
+- **Yerkassyn Zaiymov**
+- **Adilet Kairzhanov**
