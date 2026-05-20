@@ -1,24 +1,24 @@
-# AI-Based Fire and Smoke Detection System
+# Yapay Zeka Tabanlı Yangın ve Duman Tespit Sistemi
 
-This project is an AI-based computer vision system that detects **fire** and **smoke** regions in images using a **YOLOv8 object detection model**. The system includes dataset preparation, model training, evaluation metrics, inference, and a Streamlit-based web dashboard.
+Bu proje, görüntülerde **yangın** ve **duman** bölgelerini tespit etmek için **YOLOv8 nesne tespit modeli** kullanan yapay zeka tabanlı bir bilgisayarlı görü sistemidir. Proje; veri seti hazırlama, model eğitimi, değerlendirme metrikleri, çıkarım (inference) ve Streamlit tabanlı web dashboard bileşenlerinden oluşur.
 
-## Project Purpose
+## Projenin Amacı
 
-The main purpose of this project is to develop an early fire and smoke detection system using artificial intelligence. The system analyzes an uploaded image and identifies whether there are fire or smoke regions in the scene.
+Bu projenin temel amacı, yapay zeka kullanarak erken yangın ve duman tespiti yapabilen bir sistem geliştirmektir. Sistem, kullanıcı tarafından yüklenen bir görüntüyü analiz eder ve görüntüde yangın veya duman bölgeleri olup olmadığını belirler.
 
-This type of system can be useful for safety monitoring, surveillance systems, forest fire detection, and industrial risk prevention.
+Bu tür bir sistem; güvenlik izleme, kamera tabanlı gözetim sistemleri, orman yangını tespiti ve endüstriyel risk önleme gibi alanlarda kullanılabilir.
 
-## Problem Definition
+## Problem Tanımı
 
-Fire and smoke detection is an important computer vision problem because early detection can help prevent serious damage and danger. In this project, a YOLO-based object detection model was trained to detect three classes:
+Yangın ve duman tespiti önemli bir bilgisayarlı görü problemidir. Çünkü erken tespit, ciddi hasarların ve tehlikeli durumların önlenmesine yardımcı olabilir. Bu projede, üç sınıfı tespit etmek için YOLO tabanlı bir nesne tespit modeli eğitilmiştir:
 
 - `fire`
 - `smoke`
 - `other`
 
-The `other` class is used to help the model distinguish non-dangerous objects and reduce false positive detections.
+`other` sınıfı, modelin tehlikeli olmayan nesneleri ayırt etmesine ve yanlış pozitif tespitleri azaltmasına yardımcı olmak için kullanılmıştır.
 
-## Technologies Used
+## Kullanılan Teknolojiler
 
 - Python
 - YOLOv8
@@ -29,22 +29,22 @@ The `other` class is used to help the model distinguish non-dangerous objects an
 - Pandas
 - Pillow
 
-## Dataset
+## Veri Seti
 
-The dataset was downloaded from Roboflow Universe in YOLOv8 format.
+Veri seti Roboflow Universe üzerinden YOLOv8 formatında indirilmiştir.
 
-### Dataset Information
+### Veri Seti Bilgileri
 
-| Split | Number of Images |
+| Bölüm | Görüntü Sayısı |
 |---|---:|
-| Train | 4720 |
-| Validation | 590 |
+| Eğitim (Train) | 4720 |
+| Doğrulama (Validation) | 590 |
 | Test | 591 |
-| **Total** | **5901** |
+| **Toplam** | **5901** |
 
-The dataset was divided into training, validation, and test sets. Each image has a corresponding YOLO annotation file.
+Veri seti eğitim, doğrulama ve test olarak ayrılmıştır. Her görüntü için YOLO formatında karşılık gelen bir etiket dosyası bulunmaktadır.
 
-## Dataset Structure
+## Veri Seti Klasör Yapısı
 
 ```text
 dataset/
@@ -60,40 +60,40 @@ dataset/
 └── data.yaml
 ```
 
-## Model Training
+## Model Eğitimi
 
-The model was trained using **YOLOv8n** from the Ultralytics library.
+Model, Ultralytics kütüphanesindeki **YOLOv8n** modeli kullanılarak eğitilmiştir.
 
-### Training Configuration
+### Eğitim Ayarları
 
-| Parameter | Value |
+| Parametre | Değer |
 |---|---|
 | Model | YOLOv8n |
-| Epochs | 20 |
-| Image Size | 640 |
+| Epoch | 20 |
+| Görüntü Boyutu | 640 |
 | Batch Size | 8 |
-| Classes | fire, smoke, other |
+| Sınıflar | fire, smoke, other |
 
-Training command:
+Eğitim komutu:
 
 ```bash
 python train_model.py
 ```
 
-## Validation Results
+## Doğrulama Sonuçları
 
-After training, the model achieved the following validation results:
+Eğitim tamamlandıktan sonra model aşağıdaki doğrulama sonuçlarını elde etmiştir:
 
-| Metric | Value |
+| Metrik | Değer |
 |---|---:|
 | Precision | 85.0% |
 | Recall | 80.1% |
 | mAP@50 | 89.1% |
 | mAP@50-95 | 62.8% |
 
-### Class-Based Results
+### Sınıf Bazlı Sonuçlar
 
-| Class | Precision | Recall | mAP@50 | mAP@50-95 |
+| Sınıf | Precision | Recall | mAP@50 | mAP@50-95 |
 |---|---:|---:|---:|---:|
 | fire | 87.7% | 84.2% | 92.3% | 67.4% |
 | smoke | 83.9% | 80.6% | 88.7% | 59.8% |
@@ -101,28 +101,28 @@ After training, the model achieved the following validation results:
 
 ## Web Dashboard
 
-A Streamlit dashboard was developed for inference and demonstration.
+Çıkarım ve demo gösterimi için Streamlit tabanlı bir dashboard geliştirilmiştir.
 
-The dashboard allows the user to:
+Dashboard üzerinden kullanıcı şu işlemleri yapabilir:
 
-- Upload an image
-- Set a confidence threshold
-- Run fire and smoke detection
-- View the original image
-- View the detection result with bounding boxes
-- See the risk level
-- See detected object counts
-- View confidence scores in a table
+- Görüntü yükleyebilir
+- Confidence threshold değerini ayarlayabilir
+- Yangın ve duman tespitini çalıştırabilir
+- Orijinal görüntüyü görebilir
+- Tespit sonucunu bounding box'lar ile görebilir
+- Risk seviyesini görebilir
+- Tespit edilen nesne sayılarını görebilir
+- Confidence değerlerini tablo halinde inceleyebilir
 
-### Risk Level Logic
+### Risk Seviyesi Mantığı
 
-| Condition | Risk Level |
+| Durum | Risk Seviyesi |
 |---|---|
-| Fire detected | High Risk |
-| Smoke detected only | Warning |
-| No fire or smoke detected | Safe |
+| Yangın tespit edilirse | High Risk |
+| Sadece duman tespit edilirse | Warning |
+| Yangın veya duman tespit edilmezse | Safe |
 
-## Project Structure
+## Proje Klasör Yapısı
 
 ```text
 fire-smoke-detection/
@@ -136,7 +136,7 @@ fire-smoke-detection/
 │   ├── test/
 │   └── data.yaml
 ├── runs/
-├── demo_images/
+├── test_images/
 ├── split_dataset.py
 ├── train_model.py
 ├── requirements.txt
@@ -144,109 +144,115 @@ fire-smoke-detection/
 └── .gitignore
 ```
 
-## Installation
+> Not: `dataset/`, `runs/` ve `models/best.pt` gibi büyük dosyalar GitHub deposuna eklenmeyebilir. Bu dosyalar yerel ortamda bulunmalıdır.
 
-Clone the repository:
+## Kurulum
+
+Depoyu klonlayın:
 
 ```bash
 git clone https://github.com/qoqosik/digital_proje.git
 cd digital_proje
 ```
 
-Create a virtual environment:
+Sanal ortam oluşturun:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-Install dependencies:
+Gerekli kütüphaneleri yükleyin:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Running the Streamlit App
+## Streamlit Uygulamasını Çalıştırma
 
-Run the application:
+Uygulamayı çalıştırmak için:
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-Then open the local URL in your browser:
+Daha sonra tarayıcıda aşağıdaki yerel adresi açın:
 
 ```text
 http://localhost:8501
 ```
 
-## Running Inference
+## Çıkarım (Inference) Çalıştırma
 
-The trained model can be used for prediction with:
+Eğitilmiş model ile tahmin yapmak için:
 
 ```bash
-python -c "from ultralytics import YOLO; model=YOLO('models/best.pt'); model.predict(source='demo_images', save=True, conf=0.30)"
+python -c "from ultralytics import YOLO; model=YOLO('models/best.pt'); model.predict(source='test_images', save=True, conf=0.30)"
 ```
 
-Prediction results will be saved under:
+Tahmin sonuçları aşağıdaki klasöre kaydedilir:
 
 ```text
 runs/detect/predict/
 ```
 
-## Training the Model
+## Modeli Yeniden Eğitme
 
-To train the model again:
+Modeli yeniden eğitmek için:
 
 ```bash
 python train_model.py
 ```
 
-After training, the best model is saved as:
+Eğitimden sonra en iyi model dosyası şu konuma kaydedilir:
 
 ```text
 runs/detect/fire_smoke_demo/weights/best.pt
 ```
 
-For the dashboard, the model file should be copied to:
+Dashboard üzerinde kullanmak için model dosyası şu konuma kopyalanmalıdır:
 
 ```text
 models/best.pt
 ```
 
-Example:
+Örnek:
 
 ```bash
 mkdir -p models
 cp runs/detect/fire_smoke_demo/weights/best.pt models/best.pt
 ```
 
-> Note: If your training output folder is different, copy `best.pt` from your actual `runs/detect/.../weights/` directory.
+> Not: Eğitim çıktısı farklı bir klasörde oluşursa, `best.pt` dosyasını kendi `runs/detect/.../weights/` klasörünüzden kopyalayın.
 
-## Demo Explanation
+## Demo Açıklaması
 
-In the demo version, the user uploads an image through the Streamlit interface. The trained YOLOv8 model analyzes the image and detects fire, smoke, or other objects. The system displays bounding boxes, confidence scores, detection counts, and an overall risk assessment.
+Demo sürümünde kullanıcı Streamlit arayüzü üzerinden bir görüntü yükler. Eğitilmiş YOLOv8 modeli görüntüyü analiz eder ve yangın, duman veya diğer nesneleri tespit eder. Sistem; bounding box'ları, confidence değerlerini, tespit sayılarını ve genel risk değerlendirmesini ekranda gösterir.
 
-## Notes
+## Notlar
 
-- The dataset and trained model files may not be included in the GitHub repository because of file size limitations.
-- The dataset can be downloaded from Roboflow Universe.
-- The trained model file should be placed in `models/best.pt` before running the dashboard.
-- The `other` class is included to improve detection stability and reduce false positives.
+- Veri seti ve eğitilmiş model dosyaları dosya boyutu nedeniyle GitHub deposuna eklenmeyebilir.
+- Veri seti Roboflow Universe üzerinden indirilebilir.
+- Dashboard'u çalıştırmadan önce eğitilmiş model dosyası `models/best.pt` konumunda bulunmalıdır.
+- `other` sınıfı, modelin daha kararlı çalışması ve yanlış pozitif tespitleri azaltması için kullanılmıştır.
 
-## Future Improvements
+## Gelecek Geliştirmeler
 
-Possible improvements for the final version:
+Final sürümü için yapılabilecek geliştirmeler:
 
-- Add video detection support
-- Add webcam/live camera detection
-- Improve the user interface design
-- Train a larger YOLO model such as YOLOv8s
-- Add detection history
-- Export detection reports as PDF
-- Deploy the dashboard online
+- Video üzerinde yangın ve duman tespiti ekleme
+- Webcam / canlı kamera tespiti ekleme
+- Kullanıcı arayüzünü daha da geliştirme
+- YOLOv8s gibi daha büyük bir YOLO modeliyle yeniden eğitim yapma
+- Tespit geçmişi ekleme
+- Tespit raporunu PDF olarak dışa aktarma
+- Dashboard'u çevrimiçi olarak yayınlama
 
+<<<<<<< HEAD
 ## Authors
+=======
+## Yazarlar
+>>>>>>> 5c8b5b9 (Correct README)
 
 - **Yerkassyn Zaiymov**
 - **Adilet Kairzhanov**
