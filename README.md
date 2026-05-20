@@ -248,11 +248,10 @@ Final sürümü için yapılabilecek geliştirmeler:
 - Tespit raporunu PDF olarak dışa aktarma
 - Dashboard'u çevrimiçi olarak yayınlama
 
-<<<<<<< HEAD
+
 ## Authors
 =======
 ## Yazarlar
->>>>>>> 5c8b5b9 (Correct README)
 
 - **Yerkassyn Zaiymov**
 - **Adilet Kairzhanov**
