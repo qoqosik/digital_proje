@@ -249,8 +249,7 @@ Final sürümü için yapılabilecek geliştirmeler:
 - Dashboard'u çevrimiçi olarak yayınlama
 
 
-## Authors
-=======
+
 ## Yazarlar
 
 - **Yerkassyn Zaiymov**
