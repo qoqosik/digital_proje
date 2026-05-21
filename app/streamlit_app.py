@@ -7,9 +7,6 @@ from PIL import Image
 from ultralytics import YOLO
 
 
-# -----------------------------
-# Page configuration
-# -----------------------------
 st.set_page_config(
     page_title="Fire & Smoke Detection",
     page_icon="🔥",
@@ -17,9 +14,6 @@ st.set_page_config(
 )
 
 
-# -----------------------------
-# Custom CSS
-# -----------------------------
 st.markdown(
     """
     <style>
@@ -91,9 +85,6 @@ st.markdown(
 )
 
 
-# -----------------------------
-# Model loading
-# -----------------------------
 @st.cache_resource
 def load_model():
     model_path = Path("models/best.pt")
@@ -108,9 +99,6 @@ def load_model():
 model = load_model()
 
 
-# -----------------------------
-# Sidebar
-# -----------------------------
 with st.sidebar:
     st.header("🔥 Project Info")
 
@@ -157,9 +145,6 @@ with st.sidebar:
     )
 
 
-# -----------------------------
-# Main title
-# -----------------------------
 st.markdown(
     '<div class="main-title">🔥 AI-Based Fire and Smoke Detection System</div>',
     unsafe_allow_html=True
@@ -171,9 +156,6 @@ st.markdown(
 )
 
 
-# -----------------------------
-# Top metric cards
-# -----------------------------
 metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
 
 with metric_col1:
@@ -223,9 +205,6 @@ with metric_col4:
 st.divider()
 
 
-# -----------------------------
-# Upload section
-# -----------------------------
 uploaded_file = st.file_uploader(
     "Upload an image",
     type=["jpg", "jpeg", "png", "webp"]
@@ -280,9 +259,6 @@ if uploaded_file is not None:
         smoke_count = sum(1 for item in detections if item["Class"] == "smoke")
         other_count = sum(1 for item in detections if item["Class"] == "other")
 
-        # -----------------------------
-        # Risk level
-        # -----------------------------
         st.subheader("Risk Assessment")
 
         if fire_count > 0:
@@ -303,9 +279,6 @@ if uploaded_file is not None:
 
         st.divider()
 
-        # -----------------------------
-        # Images
-        # -----------------------------
         col1, col2 = st.columns(2)
 
         with col1:
@@ -318,9 +291,6 @@ if uploaded_file is not None:
 
         st.divider()
 
-        # -----------------------------
-        # Summary
-        # -----------------------------
         summary_col1, summary_col2, summary_col3 = st.columns(3)
 
         with summary_col1:
@@ -332,9 +302,6 @@ if uploaded_file is not None:
         with summary_col3:
             st.metric("Other detections", other_count)
 
-        # -----------------------------
-        # Detection table
-        # -----------------------------
         st.subheader("Detected Objects")
 
         if len(detections) == 0:
@@ -342,7 +309,6 @@ if uploaded_file is not None:
         else:
             df = pd.DataFrame(detections)
 
-            # Important classes first
             class_order = {"fire": 0, "smoke": 1, "other": 2}
             df["Sort"] = df["Class"].map(class_order)
             df = df.sort_values(by=["Sort", "Confidence"], ascending=[True, False])
@@ -352,9 +318,6 @@ if uploaded_file is not None:
 
         st.divider()
 
-        # -----------------------------
-        # Explanation for demo
-        # -----------------------------
         st.subheader("Result Explanation")
 
         if fire_count > 0:
