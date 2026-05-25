@@ -8,11 +8,11 @@ def main():
 
     model.train(
         data="dataset/data.yaml",
-        epochs=1000,
+        epochs=100,
         imgsz=640,
         batch=8,
         project="runs/detect",
-        name="fire_smoke_final_1000epochs",
+        name="fire_smoke_final_100epochs",
         device=device,
     )
 
