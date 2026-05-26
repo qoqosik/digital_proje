@@ -423,7 +423,7 @@ def load_model():
     model_path = Path("models/best.pt")
 
     if not model_path.exists():
-        st.error("Model file not found. Please make sure models/best.pt exists.")
+        st.error("Model dosyası bulunamadı. Lütfen models/best.pt dosyasının mevcut olduğundan emin olun.")
         st.stop()
 
     return YOLO(str(model_path))
@@ -446,52 +446,52 @@ def render_sidebar():
         st.markdown(
             """
             <div class="sidebar-brand">
-                <div class="sidebar-brand-title">🔥 AI Safety Dashboard</div>
-                <div class="sidebar-brand-subtitle">YOLOv8 fire and smoke detection project</div>
+                <div class="sidebar-brand-title">🔥 Yapay Zeka Güvenlik Paneli</div>
+                <div class="sidebar-brand-subtitle">YOLOv8 yangın ve duman algılama projesi</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
         st.divider()
-        st.markdown('<div class="sidebar-section">Project Overview</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-section">Projeye Genel Bakış</div>', unsafe_allow_html=True)
         st.write(
-            "A lightweight computer vision dashboard that detects fire, smoke, and other visual regions from uploaded images."
+            "Yüklenen görsellerden yangın, duman ve diğer görsel bölgeleri tespit eden hafif bir bilgisayarlı görü paneli."
         )
 
         st.divider()
-        st.markdown('<div class="sidebar-section">Dataset Information</div>', unsafe_allow_html=True)
-        sidebar_key_value("Total images", f"{DATASET_SIZE:,}")
-        sidebar_key_value("Training", f"{TRAIN_IMAGES:,}")
-        sidebar_key_value("Validation", f"{VAL_IMAGES:,}")
-        sidebar_key_value("Testing", f"{TEST_IMAGES:,}")
+        st.markdown('<div class="sidebar-section">Veri Kümesi Bilgisi</div>', unsafe_allow_html=True)
+        sidebar_key_value("Toplam görsel", f"{DATASET_SIZE:,}")
+        sidebar_key_value("Eğitim", f"{TRAIN_IMAGES:,}")
+        sidebar_key_value("Doğrulama", f"{VAL_IMAGES:,}")
+        sidebar_key_value("Test", f"{TEST_IMAGES:,}")
 
         st.divider()
-        st.markdown('<div class="sidebar-section">Model Details</div>', unsafe_allow_html=True)
-        sidebar_key_value("Architecture", MODEL_ARCHITECTURE)
-        sidebar_key_value("Epochs", str(EPOCHS))
-        sidebar_key_value("Classes", "fire, smoke, other")
+        st.markdown('<div class="sidebar-section">Model Detayları</div>', unsafe_allow_html=True)
+        sidebar_key_value("Mimari", MODEL_ARCHITECTURE)
+        sidebar_key_value("Epok (Epoch)", str(EPOCHS))
+        sidebar_key_value("Sınıflar", "yangın, duman, diğer")
 
         st.divider()
-        st.markdown('<div class="sidebar-section">Validation Metrics</div>', unsafe_allow_html=True)
-        sidebar_key_value("Precision", PRECISION)
-        sidebar_key_value("Recall", RECALL)
+        st.markdown('<div class="sidebar-section">Doğrulama Metrikleri</div>', unsafe_allow_html=True)
+        sidebar_key_value("Keskinlik (Precision)", PRECISION)
+        sidebar_key_value("Duyarlılık (Recall)", RECALL)
         sidebar_key_value("mAP@50", MAP_50)
         sidebar_key_value("mAP@50-95", MAP_50_95)
 
         st.divider()
-        st.markdown('<div class="sidebar-section">How It Works</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-section">Nasıl Çalışır?</div>', unsafe_allow_html=True)
         st.write(
             """
-            1. Upload an image
-            2. Choose confidence threshold
-            3. Run YOLOv8 inference
-            4. Review risk and detections
+            1. Bir görsel yükleyin
+            2. Güven eşiğini seçin
+            3. YOLOv8 çıkarımını çalıştırın
+            4. Risk ve tespitleri inceleyin
             """
         )
 
         st.divider()
-        st.markdown('<div class="sidebar-section">Authors</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-section">Yazarlar</div>', unsafe_allow_html=True)
         st.write("Yerkassyn Zaiymov  \nAdilet Kairzhanov")
 
 
@@ -499,9 +499,9 @@ def render_hero():
     st.markdown(
         """
         <section class="hero">
-            <div class="hero-kicker">🔥 Computer Vision Safety System</div>
-            <h1>AI-Based Fire & Smoke Detection System</h1>
-            <p>Real-time fire and smoke detection using YOLOv8 computer vision.</p>
+            <div class="hero-kicker">🔥 Bilgisayarlı Görü Güvenlik Sistemi</div>
+            <h1>Yapay Zeka Tabanlı Yangın ve Duman Algılama Sistemi</h1>
+            <p>YOLOv8 bilgisayarlı görü teknolojisi ile gerçek zamanlı yangın ve duman algılama.</p>
         </section>
         """,
         unsafe_allow_html=True,
@@ -522,36 +522,36 @@ def render_metric_card(icon, title, value):
 
 
 def render_top_metrics():
-    st.markdown('<div class="section-title">Model Performance</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Model Performansı</div>', unsafe_allow_html=True)
     metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
 
     with metric_col1:
-        render_metric_card("📦", "Dataset Size", f"{DATASET_SIZE:,}")
+        render_metric_card("📦", "Veri Kümesi Boyutu", f"{DATASET_SIZE:,}")
     with metric_col2:
         render_metric_card("🎯", "mAP@50", MAP_50)
     with metric_col3:
-        render_metric_card("✅", "Precision", PRECISION)
+        render_metric_card("✅", "Keskinlik (Precision)", PRECISION)
     with metric_col4:
-        render_metric_card("📡", "Recall", RECALL)
+        render_metric_card("📡", "Duyarlılık (Recall)", RECALL)
 
 
 def render_realtime_section():
     with st.container(border=True):
-        st.markdown('<div class="card-title-row">🎥 Real-Time Detection</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row">🎥 Gerçek Zamanlı Algılama</div>', unsafe_allow_html=True)
         st.markdown(
             """
             <div class="card-copy">
-                Launch the OpenCV webcam detector for live fire and smoke monitoring.
-                The separate camera window uses the trained YOLOv8 model locally.
+                Canlı yangın ve duman izlemesi için OpenCV web kamerası dedektörünü başlatın.
+                Ayrı açılan kamera penceresi, eğitilmiş YOLOv8 modelini yerel olarak kullanır.
             </div>
             """,
             unsafe_allow_html=True,
         )
         button_col, _ = st.columns([0.34, 0.66])
         with button_col:
-            if st.button("🎥 Launch Real-Time Camera", type="secondary", use_container_width=True):
+            if st.button("🎥 Gerçek Zamanlı Kamerayı Başlat", type="secondary", use_container_width=True):
                 subprocess.Popen([sys.executable, "realtime_camera.py"])
-                st.success("Real-time camera launched successfully.")
+                st.success("Gerçek zamanlı kamera başarıyla başlatıldı.")
 
 
 def render_alert(level, icon, title, copy):
@@ -592,9 +592,9 @@ def render_footer():
     st.markdown(
         """
         <footer class="footer">
-            <strong>AI-Based Fire and Smoke Detection System</strong>
-            Powered by YOLOv8 + Streamlit<br>
-            Created by:<br>
+            <strong>Yapay Zeka Tabanlı Yangın ve Duman Algılama Sistemi</strong><br>
+            YOLOv8 + Streamlit ile geliştirilmiştir<br>
+            Geliştirenler:<br>
             Yerkassyn Zaiymov<br>
             Adilet Kairzhanov
         </footer>
@@ -609,27 +609,27 @@ render_sidebar()
 render_hero()
 render_top_metrics()
 
-st.markdown('<div class="section-title">Image Detection Workspace</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">Görsel Algılama Çalışma Alanı</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="section-copy">Upload an image and run AI detection.</div>',
+    '<div class="section-copy">Bir görsel yükleyin ve yapay zeka algılamasını çalıştırın.</div>',
     unsafe_allow_html=True,
 )
 
 with st.container(border=True):
-    st.markdown('<div class="workspace-label">Upload Test Image</div>', unsafe_allow_html=True)
+    st.markdown('<div class="workspace-label">Test Görseli Yükle</div>', unsafe_allow_html=True)
     uploaded_file = st.file_uploader(
-        "Upload an image",
+        "Bir görsel yükleyin",
         type=["jpg", "jpeg", "png", "webp"],
-        help="Supported formats: JPG, JPEG, PNG, and WEBP.",
+        help="Desteklenen formatlar: JPG, JPEG, PNG ve WEBP.",
     )
 
     confidence = st.slider(
-        "Confidence threshold",
+        "Güven eşiği (Confidence threshold)",
         min_value=0.10,
         max_value=0.90,
         value=0.25,
         step=0.05,
-        help="Minimum confidence score required to display a detected object.",
+        help="Algılanan bir nesnenin görüntülenmesi için gereken minimum güven skoru.",
     )
 
     if uploaded_file is not None:
@@ -640,7 +640,7 @@ with st.container(border=True):
     _, detect_col, _ = st.columns([0.32, 0.36, 0.32])
     with detect_col:
         detect_button = st.button(
-            "🔥 Detect Fire / Smoke",
+            "🔥 Yangın / Duman Algıla",
             type="primary",
             use_container_width=True,
             disabled=uploaded_file is None,
@@ -651,7 +651,7 @@ if uploaded_file is not None and detect_button:
         image.save(temp_file.name)
         temp_path = temp_file.name
 
-    with st.spinner("Running YOLOv8 detection..."):
+    with st.spinner("YOLOv8 algılaması çalıştırılıyor..."):
         results = model.predict(
             source=temp_path,
             conf=confidence,
@@ -680,62 +680,62 @@ if uploaded_file is not None and detect_button:
     smoke_count = sum(1 for item in detections if item["Class"] == "smoke")
     other_count = sum(1 for item in detections if item["Class"] == "other")
 
-    st.markdown('<div class="section-title">Results</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Sonuçlar</div>', unsafe_allow_html=True)
     with st.container(border=True):
-        st.markdown('<div class="card-title-row">Risk Assessment</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row">Risk Değerlendirmesi</div>', unsafe_allow_html=True)
 
         if fire_count > 0:
             render_alert(
                 "high",
                 "🔥",
-                "HIGH RISK",
-                "Fire has been detected in the uploaded image. Immediate attention is recommended.",
+                "YÜKSEK RİSK",
+                "Yüklenen görselde yangın algılandı. Acil müdahale önerilir.",
             )
         elif smoke_count > 0:
             render_alert(
                 "warning",
                 "💨",
-                "WARNING",
-                "Smoke has been detected. This may indicate an early fire risk or hazardous condition.",
+                "UYARI",
+                "Duman algılandı. Bu durum erken bir yangın riskine veya tehlikeli bir duruma işaret edebilir.",
             )
         else:
             render_alert(
                 "safe",
                 "✅",
-                "SAFE",
-                "No fire or smoke was detected above the selected confidence threshold.",
+                "GÜVENLİ",
+                "Seçilen güven eşiti üzerinde herhangi bir yangın veya duman algılanmadı.",
             )
 
-        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Image Comparison</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Görsel Karşılaştırma</div>', unsafe_allow_html=True)
         image_col1, image_col2 = st.columns(2)
 
         with image_col1:
-            render_image_card("Original Image", image)
+            render_image_card("Orijinal Görsel", image)
         with image_col2:
-            render_image_card("YOLOv8 Detection Result", annotated_image)
+            render_image_card("YOLOv8 Algılama Sonucu", annotated_image)
 
-        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Detection Summary</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Algılama Özeti</div>', unsafe_allow_html=True)
         summary_col1, summary_col2, summary_col3 = st.columns(3)
 
         with summary_col1:
-            st.metric("Fire Detections", fire_count)
+            st.metric("Yangın Algılamaları", fire_count)
         with summary_col2:
-            st.metric("Smoke Detections", smoke_count)
+            st.metric("Duman Algılamaları", smoke_count)
         with summary_col3:
-            st.metric("Other Detections", other_count)
+            st.metric("Diğer Algılamalar", other_count)
 
-        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Detected Objects</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Algılanan Nesneler</div>', unsafe_allow_html=True)
 
         if len(detections) == 0:
-            st.info("No objects detected with the selected confidence threshold.")
+            st.info("Seçilen güven eşiğinde hiçbir nesne algılanmadı.")
         else:
             df = pd.DataFrame(detections)
             df = df.sort_values(by="Confidence", ascending=False).reset_index(drop=True)
             df["Confidence"] = df["Confidence"].map(lambda value: f"{value * 100:.1f}%")
             df = df.rename(
                 columns={
-                    "Class": "Detected Object",
-                    "Confidence": "Confidence Score",
+                    "Class": "Algılanan Nesne",
+                    "Confidence": "Güven Skoru",
                 }
             )
 
@@ -745,28 +745,28 @@ if uploaded_file is not None and detect_button:
                 hide_index=True,
             )
 
-        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Result Explanation</div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-title-row" style="margin-top:0.85rem;">Sonuç Açıklaması</div>', unsafe_allow_html=True)
         if fire_count > 0:
             explanation = (
-                "The system detected fire regions in the uploaded image. "
-                "This indicates a high-risk situation and should be prioritized during monitoring."
+                "Sistem, yüklenen görselde yangın bölgeleri tespit etti. "
+                "Bu durum yüksek riskli bir senaryoya işaret eder ve izleme sırasında önceliklendirilmelidir."
             )
         elif smoke_count > 0:
             explanation = (
-                "The system detected smoke regions in the uploaded image. "
-                "This may indicate an early fire risk or another hazardous visual condition."
+                "Sistem, yüklenen görselde duman bölgeleri tespit etti. "
+                "Bu durum erken bir yangın riskini veya başka bir tehlikeli görsel durumu gösterebilir."
             )
         else:
             explanation = (
-                "The system did not detect fire or smoke above the selected confidence threshold. "
-                "The scene is classified as safe for this image-based analysis."
+                "Sistem, seçilen güven eşiğinin üzerinde yangın veya duman tespit etmedi. "
+                "Bu görsel tabanlı analize göre ortam güvenli olarak sınıflandırılmıştır."
             )
 
         st.markdown(
             f'<div class="explanation-panel">{explanation}</div>',
             unsafe_allow_html=True,
         )
-st.markdown('<div class="section-title">🎥 Real-Time Camera</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">🎥 Gerçek Zamanlı Kamera</div>', unsafe_allow_html=True)
 render_realtime_section()
 
 
