@@ -64,9 +64,9 @@ Projede yangın ve duman görüntülerinden oluşan özel bir veri seti kullanı
 
 ## Veri Dağılımı
 - Toplam görüntü: 5901
-- Eğitim verisi: %60
-- Doğrulama verisi: %20
-- Test verisi: %20
+- Eğitim verisi: %80
+- Doğrulama verisi: %10
+- Test verisi: %10
 
 ---
 
