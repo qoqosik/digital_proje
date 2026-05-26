@@ -229,10 +229,3 @@ python realtime_camera.py
 # 📚 Akademik Amaç
 
 Bu proje, bilgisayarlı görü ve yapay zekâ teknolojilerinin gerçek hayat güvenlik problemlerine uygulanmasını göstermek amacıyla geliştirilmiştir.
-
----
-
-## Yazarlar
-
-- **Yerkassyn Zaiymov**
-- **Adilet Kairzhanov**
