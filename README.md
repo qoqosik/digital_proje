@@ -1,254 +1,236 @@
-# Yapay Zeka Tabanlı Yangın ve Duman Tespit Sistemi
+# 🔥 Yapay Zekâ Tabanlı Yangın ve Duman Tespit Sistemi
 
-Bu proje, görüntülerde **yangın** ve **duman** bölgelerini tespit etmek için **YOLOv8 nesne tespit modeli** kullanan yapay zeka tabanlı bir bilgisayarlı görü sistemidir. Proje; veri seti hazırlama, model eğitimi, değerlendirme metrikleri, çıkarım (inference) ve Streamlit tabanlı web dashboard bileşenlerinden oluşur.
+## Proje Açıklaması
 
-## Projenin Amacı
+Bu proje, görüntülerde ve gerçek zamanlı kamera akışında yangın ile duman tespiti yapabilen yapay zekâ destekli bir bilgisayarlı görü sistemi geliştirmek amacıyla hazırlanmıştır.
 
-Bu projenin temel amacı, yapay zeka kullanarak erken yangın ve duman tespiti yapabilen bir sistem geliştirmektir. Sistem, kullanıcı tarafından yüklenen bir görüntüyü analiz eder ve görüntüde yangın veya duman bölgeleri olup olmadığını belirler.
+Sistem, YOLOv8 nesne tespit modeli kullanılarak eğitilmiş ve yangın güvenliği senaryoları için optimize edilmiştir. Kullanıcılar web arayüzü üzerinden görüntü yükleyebilir veya gerçek zamanlı kamera modunu çalıştırarak canlı tespit gerçekleştirebilir.
 
-Bu tür bir sistem; güvenlik izleme, kamera tabanlı gözetim sistemleri, orman yangını tespiti ve endüstriyel risk önleme gibi alanlarda kullanılabilir.
+Proje kapsamında:
+- Görüntü tabanlı nesne tespiti
+- Gerçek zamanlı kamera analizi
+- Risk değerlendirmesi
+- Bounding box çizimi
+- Güven skoru analizi
+özellikleri geliştirilmiştir.
 
-## Problem Tanımı
+---
 
-Yangın ve duman tespiti önemli bir bilgisayarlı görü problemidir. Çünkü erken tespit, ciddi hasarların ve tehlikeli durumların önlenmesine yardımcı olabilir. Bu projede, üç sınıfı tespit etmek için YOLO tabanlı bir nesne tespit modeli eğitilmiştir:
+# 👨‍💻 Proje Geliştiricileri
 
-- `fire`
-- `smoke`
-- `other`
+- **Yerkassyn Zaiymov**
+- **Adilet Kairzhanov**
 
-`other` sınıfı, modelin tehlikeli olmayan nesneleri ayırt etmesine ve yanlış pozitif tespitleri azaltmasına yardımcı olmak için kullanılmıştır.
+---
 
-## Kullanılan Teknolojiler
+# 🎯 Projenin Amacı
 
-- Python
+Bu projenin amacı:
+- Yangın ve dumanı erken aşamada tespit etmek
+- Bilgisayarlı görü tekniklerini gerçek hayatta uygulamak
+- Gerçek zamanlı güvenlik sistemleri geliştirmek
+- Yapay zekâ tabanlı risk analiz sistemleri oluşturmak
+
+---
+
+# 🧠 Kullanılan Teknolojiler
+
+## Programlama Dili
+- Python 3
+
+## Yapay Zekâ ve Bilgisayarlı Görü
 - YOLOv8
 - Ultralytics
 - OpenCV
+
+## Web Arayüzü
 - Streamlit
-- PyTorch
+
+## Veri İşleme
+- NumPy
 - Pandas
 - Pillow
 
-## Veri Seti
+---
 
-Veri seti Roboflow Universe üzerinden YOLOv8 formatında indirilmiştir.
+# 📂 Veri Seti
 
-### Veri Seti Bilgileri
+Projede yangın ve duman görüntülerinden oluşan özel bir veri seti kullanılmıştır.
 
-| Bölüm | Görüntü Sayısı |
-|---|---:|
-| Eğitim (Train) | 4720 |
-| Doğrulama (Validation) | 590 |
-| Test | 591 |
-| **Toplam** | **5901** |
+## Sınıflar
+- fire
+- smoke
+- other
 
-Veri seti eğitim, doğrulama ve test olarak ayrılmıştır. Her görüntü için YOLO formatında karşılık gelen bir etiket dosyası bulunmaktadır.
+## Veri Dağılımı
+- Toplam görüntü: 5901
+- Eğitim verisi: %60
+- Doğrulama verisi: %20
+- Test verisi: %20
 
-## Veri Seti Klasör Yapısı
+---
 
-```text
-dataset/
-├── train/
-│   ├── images/
-│   └── labels/
-├── valid/
-│   ├── images/
-│   └── labels/
-├── test/
-│   ├── images/
-│   └── labels/
-└── data.yaml
-```
+# ⚙️ Model Eğitimi
 
-## Model Eğitimi
+Model eğitimi YOLOv8n mimarisi kullanılarak gerçekleştirilmiştir.
 
-Model, Ultralytics kütüphanesindeki **YOLOv8n** modeli kullanılarak eğitilmiştir.
+## Eğitim Bilgileri
+- Model: YOLOv8n
+- Epoch sayısı: 100
+- Görüntü boyutu: 640x640
+- Framework: PyTorch
 
-### Eğitim Ayarları
+---
 
-| Parametre | Değer |
-|---|---|
-| Model | YOLOv8n |
-| Epoch | 20 |
-| Görüntü Boyutu | 640 |
-| Batch Size | 8 |
-| Sınıflar | fire, smoke, other |
+# 📊 Model Performansı
 
-Eğitim komutu:
+## Sonuçlar
+- Precision: 87.2%
+- Recall: 83.5%
+- mAP@50: 91.0%
+- mAP@50-95: 66.7%
+
+Model başarılı şekilde yangın ve duman bölgelerini tespit edebilmektedir.
+
+---
+
+# 🖼️ Görüntü Tespit Sistemi
+
+Kullanıcı:
+1. Bir görüntü yükler
+2. Confidence threshold değerini belirler
+3. “Detect Fire / Smoke” butonuna basar
+4. Sistem nesneleri analiz eder
+5. Sonuçlar ekranda gösterilir
+
+Sistem:
+- Yangın bölgelerini
+- Duman bölgelerini
+- Diğer nesneleri
+tespit eder ve bounding box ile işaretler.
+
+---
+
+# 🎥 Gerçek Zamanlı Kamera Sistemi
+
+Proje gerçek zamanlı kamera desteğine sahiptir.
+
+Kullanıcı:
+- “Launch Real-Time Camera” butonuna basarak sistemi çalıştırabilir.
+- Webcam üzerinden canlı yangın ve duman tespiti yapılabilir.
+
+Gerçek zamanlı sistem:
+- FPS bilgisi gösterir
+- Risk seviyesini analiz eder
+- Canlı bounding box çizer
+- Anlık nesne tespiti yapar
+
+---
+
+# 🚨 Risk Analizi
+
+Sistem otomatik risk değerlendirmesi yapmaktadır.
+
+## Risk Seviyeleri
+
+### 🔴 HIGH RISK
+Yangın tespit edildiğinde gösterilir.
+
+### 🟡 WARNING
+Duman tespit edildiğinde gösterilir.
+
+### 🟢 SAFE
+Yangın veya duman bulunmadığında gösterilir.
+
+---
+
+# 📁 Proje Yapısı
 
 ```bash
-python train_model.py
-```
-
-## Doğrulama Sonuçları
-
-Eğitim tamamlandıktan sonra model aşağıdaki doğrulama sonuçlarını elde etmiştir:
-
-| Metrik | Değer |
-|---|---:|
-| Precision | 85.0% |
-| Recall | 80.1% |
-| mAP@50 | 89.1% |
-| mAP@50-95 | 62.8% |
-
-### Sınıf Bazlı Sonuçlar
-
-| Sınıf | Precision | Recall | mAP@50 | mAP@50-95 |
-|---|---:|---:|---:|---:|
-| fire | 87.7% | 84.2% | 92.3% | 67.4% |
-| smoke | 83.9% | 80.6% | 88.7% | 59.8% |
-| other | 83.6% | 75.3% | 86.3% | 61.2% |
-
-## Web Dashboard
-
-Çıkarım ve demo gösterimi için Streamlit tabanlı bir dashboard geliştirilmiştir.
-
-Dashboard üzerinden kullanıcı şu işlemleri yapabilir:
-
-- Görüntü yükleyebilir
-- Confidence threshold değerini ayarlayabilir
-- Yangın ve duman tespitini çalıştırabilir
-- Orijinal görüntüyü görebilir
-- Tespit sonucunu bounding box'lar ile görebilir
-- Risk seviyesini görebilir
-- Tespit edilen nesne sayılarını görebilir
-- Confidence değerlerini tablo halinde inceleyebilir
-
-### Risk Seviyesi Mantığı
-
-| Durum | Risk Seviyesi |
-|---|---|
-| Yangın tespit edilirse | High Risk |
-| Sadece duman tespit edilirse | Warning |
-| Yangın veya duman tespit edilmezse | Safe |
-
-## Proje Klasör Yapısı
-
-```text
-fire-smoke-detection/
+digital_proje/
+│
 ├── app/
 │   └── streamlit_app.py
+│
 ├── models/
 │   └── best.pt
+│
 ├── dataset/
 │   ├── train/
 │   ├── valid/
-│   ├── test/
-│   └── data.yaml
-├── runs/
-├── test_images/
-├── split_dataset.py
+│   └── test/
+│
+├── realtime_camera.py
 ├── train_model.py
+├── split_dataset.py
 ├── requirements.txt
-├── README.md
-└── .gitignore
+└── README.md
 ```
 
-> Not: `dataset/`, `runs/` ve `models/best.pt` gibi büyük dosyalar GitHub deposuna eklenmeyebilir. Bu dosyalar yerel ortamda bulunmalıdır.
+---
 
-## Kurulum
+# ▶️ Projeyi Çalıştırma
 
-Depoyu klonlayın:
+## 1. Repository Klonlama
 
 ```bash
 git clone https://github.com/qoqosik/digital_proje.git
 cd digital_proje
 ```
 
-Sanal ortam oluşturun:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-Gerekli kütüphaneleri yükleyin:
+## 2. Gerekli Kütüphaneleri Kurma
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Streamlit Uygulamasını Çalıştırma
-
-Uygulamayı çalıştırmak için:
+## 3. Streamlit Uygulamasını Başlatma
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-Daha sonra tarayıcıda aşağıdaki yerel adresi açın:
+---
 
-```text
-http://localhost:8501
-```
-
-## Çıkarım (Inference) Çalıştırma
-
-Eğitilmiş model ile tahmin yapmak için:
+# 📷 Gerçek Zamanlı Kamera Modu
 
 ```bash
-python -c "from ultralytics import YOLO; model=YOLO('models/best.pt'); model.predict(source='test_images', save=True, conf=0.30)"
+python realtime_camera.py
 ```
 
-Tahmin sonuçları aşağıdaki klasöre kaydedilir:
+---
 
-```text
-runs/detect/predict/
-```
+# 💡 Projenin Özellikleri
 
-## Modeli Yeniden Eğitme
+✅ Yapay zekâ destekli yangın tespiti  
+✅ Duman tespiti  
+✅ Gerçek zamanlı kamera desteği  
+✅ Web tabanlı kullanıcı arayüzü  
+✅ YOLOv8 nesne tespiti  
+✅ Risk değerlendirme sistemi  
+✅ Bounding box görselleştirmesi  
+✅ Confidence threshold ayarlama  
+✅ Modern Streamlit arayüzü  
 
-Modeli yeniden eğitmek için:
+---
 
-```bash
-python train_model.py
-```
+# 📌 Gelecekte Yapılabilecek Geliştirmeler
 
-Eğitimden sonra en iyi model dosyası şu konuma kaydedilir:
+- Alarm sistemi entegrasyonu
+- Mobil uygulama desteği
+- IP kamera entegrasyonu
+- Daha büyük veri seti ile eğitim
+- Daha yüksek doğruluk oranı
+- Cloud tabanlı izleme sistemi
+- Çoklu kamera desteği
 
-```text
-runs/detect/fire_smoke_demo/weights/best.pt
-```
+---
 
-Dashboard üzerinde kullanmak için model dosyası şu konuma kopyalanmalıdır:
+# 📚 Akademik Amaç
 
-```text
-models/best.pt
-```
+Bu proje, bilgisayarlı görü ve yapay zekâ teknolojilerinin gerçek hayat güvenlik problemlerine uygulanmasını göstermek amacıyla geliştirilmiştir.
 
-Örnek:
-
-```bash
-mkdir -p models
-cp runs/detect/fire_smoke_demo/weights/best.pt models/best.pt
-```
-
-> Not: Eğitim çıktısı farklı bir klasörde oluşursa, `best.pt` dosyasını kendi `runs/detect/.../weights/` klasörünüzden kopyalayın.
-
-## Demo Açıklaması
-
-Demo sürümünde kullanıcı Streamlit arayüzü üzerinden bir görüntü yükler. Eğitilmiş YOLOv8 modeli görüntüyü analiz eder ve yangın, duman veya diğer nesneleri tespit eder. Sistem; bounding box'ları, confidence değerlerini, tespit sayılarını ve genel risk değerlendirmesini ekranda gösterir.
-
-## Notlar
-
-- Veri seti ve eğitilmiş model dosyaları dosya boyutu nedeniyle GitHub deposuna eklenmeyebilir.
-- Veri seti Roboflow Universe üzerinden indirilebilir.
-- Dashboard'u çalıştırmadan önce eğitilmiş model dosyası `models/best.pt` konumunda bulunmalıdır.
-- `other` sınıfı, modelin daha kararlı çalışması ve yanlış pozitif tespitleri azaltması için kullanılmıştır.
-
-## Gelecek Geliştirmeler
-
-Final sürümü için yapılabilecek geliştirmeler:
-
-- Video üzerinde yangın ve duman tespiti ekleme
-- Webcam / canlı kamera tespiti ekleme
-- Kullanıcı arayüzünü daha da geliştirme
-- YOLOv8s gibi daha büyük bir YOLO modeliyle yeniden eğitim yapma
-- Tespit geçmişi ekleme
-- Tespit raporunu PDF olarak dışa aktarma
-- Dashboard'u çevrimiçi olarak yayınlama
-
-
+---
 
 ## Yazarlar
 
